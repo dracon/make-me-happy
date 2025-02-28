@@ -1,19 +1,22 @@
-.PHONY: all install_docker install_kind install_kubectl install_awscli create_cluster destroy_cluster
+.PHONY: all install_docker install_kind install_kubectl install_k9s install_awscli create_cluster destroy_cluster
 
 # Default target
 all: help
 
 # Help message
 help:
-	@echo "Makefile for installing Docker, Kind, Kubectl, and AWS CLI."
-	@echo "Usage:"
+	@echo "*******************************************************************"
+	@echo "Makefile for installing Docker, Kind, Kubectl, k9s, and AWS CLI."
+	@echo "Create kind cluster and destroy kind cluster."
+	@echo "*******************************************************************"
+	@echo " Usage: "
 	@echo "  make install_docker    # Install Docker"
 	@echo "  make install_kind      # Install Kind"
 	@echo "  make install_kubectl   # Install Kubectl"
-	@echo "	 make install_k9s       # Install k9s"
+	@echo "  make install_k9s       # Install k9s"
 	@echo "  make install_awscli    # Install AWS CLI"
-	@echo "  make create_cluster # Kind create a cluster CLUSTER_NAME"
-	@echo "  make destroy_cluster # Kind destroy a cluster CLUSTER_NAME"
+	@echo "  make create_cluster    # Create a cluster CLUSTER_NAME"
+	@echo "  make destroy_cluster   # Destroy a cluster"
 
 # Install Docker
 install_docker:
@@ -40,13 +43,13 @@ install_kubectl:
 	@sudo mv ./kubectl /usr/local/bin/kubectl
 	@echo "Kubectl installed successfully!"
 
-
 # Install K9s
 install_k9s:
 	@echo "Installing k9s"
-	@wget https://github.com/derailed/k9s/releases/download/v0.32.7/k9s_linux_amd64.deb && sudo apt install ./k9s_linux_amd64.deb && rm k9s_linux_amd64.deb
+	@wget https://github.com/derailed/k9s/releases/download/v0.32.7/k9s_linux_amd64.deb \
+	&& sudo apt install ./k9s_linux_amd64.deb \
+	&& rm k9s_linux_amd64.deb
 	@echo "k9s installed successfully"
-
 
 # Install AWS CLI
 install_awscli:
@@ -55,11 +58,13 @@ install_awscli:
 	@sudo apt-get install -y awscli
 	@echo "AWS CLI installed successfully!"
 
+# Define default cluster name if not provided
+CLUSTER_NAME ?= my-cluster
+
 # Kind create a cluster
 create_cluster:
 	@kind create cluster -n ${CLUSTER_NAME}
 
-
-# kind destroy cluster
+# Kind destroy cluster
 destroy_cluster:
 	@kind delete cluster -n ${CLUSTER_NAME}
