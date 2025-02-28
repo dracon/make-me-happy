@@ -10,7 +10,7 @@ help:
 	@echo "  make install_docker    # Install Docker"
 	@echo "  make install_kind      # Install Kind"
 	@echo "  make install_kubectl   # Install Kubectl"
-	@echo "	make install_k9s       # Unstall k9s"
+	@echo "	 make install_k9s       # Install k9s"
 	@echo "  make install_awscli    # Install AWS CLI"
 	@echo "  make create_cluster # Kind create a cluster CLUSTER_NAME"
 	@echo "  make destroy_cluster # Kind destroy a cluster CLUSTER_NAME"
