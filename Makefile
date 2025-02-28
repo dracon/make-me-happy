@@ -10,6 +10,7 @@ help:
 	@echo "  make install_docker    # Install Docker"
 	@echo "  make install_kind      # Install Kind"
 	@echo "  make install_kubectl   # Install Kubectl"
+	@echo "	make install_k9s       # Unstall k9s"
 	@echo "  make install_awscli    # Install AWS CLI"
 	@echo "  make create_cluster # Kind create a cluster CLUSTER_NAME"
 	@echo "  make destroy_cluster # Kind destroy a cluster CLUSTER_NAME"
@@ -38,6 +39,14 @@ install_kubectl:
 	@chmod +x ./kubectl
 	@sudo mv ./kubectl /usr/local/bin/kubectl
 	@echo "Kubectl installed successfully!"
+
+
+# Install K9s
+install_k9s:
+	@echo "Installing k9s"
+	@wget https://github.com/derailed/k9s/releases/download/v0.32.7/k9s_linux_amd64.deb && sudo apt install ./k9s_linux_amd64.deb && rm k9s_linux_amd64.deb
+	@echo "k9s installed successfully"
+
 
 # Install AWS CLI
 install_awscli:
