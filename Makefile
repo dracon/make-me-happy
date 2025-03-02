@@ -1,4 +1,4 @@
-.PHONY: all install_docker install_kind install_kubectl install_k9s install_awscli create_cluster destroy_cluster
+.PHONY: all install_docker install_kind install_kubectl install_k9s install_awscli install_helm create_cluster destroy_cluster
 
 # Default target
 all: help
@@ -15,6 +15,7 @@ help:
 	@echo "  make install_kubectl   # Install Kubectl"
 	@echo "  make install_k9s       # Install k9s"
 	@echo "  make install_awscli    # Install AWS CLI"
+	@echo "  make install_helm      # Install Helm"
 	@echo "  make create_cluster    # Create a cluster CLUSTER_NAME"
 	@echo "  make destroy_cluster   # Destroy a cluster"
 
@@ -57,6 +58,13 @@ install_awscli:
 	@sudo apt-get update
 	@sudo apt-get install -y awscli
 	@echo "AWS CLI installed successfully!"
+
+# Install Helm
+install_helm:
+	@echo "Installing Helm..."
+	@curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+	@echo "Helm installed successfully!"
+
 
 # Define default cluster name if not provided
 CLUSTER_NAME ?= my-cluster
